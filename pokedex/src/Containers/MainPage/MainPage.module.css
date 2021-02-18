@@ -1,0 +1,12 @@
+.backgroundImage {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    position: fixed;
+    z-index: -1
+}
+
+.contentContainer{
+    color: white;
+    z-index: 0;
+}
