@@ -12,9 +12,9 @@ class MainPage extends Component {
         return (
             <div>
                 <Image src={image} className={styles.backgroundImage}/>
-                <Container className={styles.contentContainer}>
+                <div className={styles.contentContainer}>
                     <Content />
-                </Container>
+                </div>
             </div>
         );
     }
