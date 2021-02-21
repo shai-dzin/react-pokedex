@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import axios from "axios"
 import { Interface } from 'readline'
-import { Card, Col, Container, Row } from 'react-bootstrap'
-import PokemonCard from '../../Components/PokemonCard'
+import { Badge, Card, Col, Container, Row } from 'react-bootstrap'
+import PokemonCard from '../../Components/PokemonCard/PokemonCard'
 import { SortedArray } from 'typescript'
 
 interface PokedexState {
@@ -23,7 +23,7 @@ class Pokedex extends Component<any, PokedexState> {
     }
 
     componentDidMount() {
-        this.getPokemon()
+        this.getPokemon(null)
     }
 
     async getPokemon() {
@@ -41,6 +41,7 @@ class Pokedex extends Component<any, PokedexState> {
             
             // Save the URL to the next Batch
             this.nextBatchOfPokemonURL = response.data.next
+            console.log(this.nextBatchOfPokemonURL)
 
             // Load Detailed information about them
             this.loadDetailedPokemonInfo()
@@ -69,7 +70,11 @@ class Pokedex extends Component<any, PokedexState> {
                 // Sort List because request are async and get finish at different times
                 currentPokemonList.sort(this.compare)
 
-                this.setState({pokemons : currentPokemonList})
+                this.setState({
+                    pokemons : currentPokemonList,
+                    pokemonReferences : []
+                })
+                
             } catch (error) {
                 console.log(error)
             }
@@ -129,9 +134,7 @@ interface PokemonInterface {
     abilities: Ability[]
     moves: Move[]
     stats: Stat[]
-    types: Type[]
-
-    
+    types: PokeType[]
 }
 
 export interface Pokemon extends PokemonInterface {
@@ -161,7 +164,7 @@ interface Stat {
     }
 }
 
-interface Type {
+export interface PokeType {
     type: {
         name: string
         url: string

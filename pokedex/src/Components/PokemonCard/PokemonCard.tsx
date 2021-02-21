@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
-import { Card, Image } from 'react-bootstrap'
-import {Pokemon} from "../Containers/Pokedex/Pokedex"
+import { Card, Container, Image, Row } from 'react-bootstrap'
+import {Pokemon} from "../../Containers/Pokedex/Pokedex"
 import styles from "./PokemonCard.module.css"
-import grassBackground from "../Images/cardBackground.png"
+import grassBackground from "../../Images/cardBackground.png"
+import PokemonCardType from '../PokemonCardType/PokemonCardType'
 
 
 class PokemonCard extends Component<{pokemon: Pokemon}, {}> {
@@ -18,6 +19,15 @@ class PokemonCard extends Component<{pokemon: Pokemon}, {}> {
                     <Image src={grassBackground} className={styles.grassBackground}/>
                     <Image src={this.props.pokemon.imageURL} className={styles.pokemonImage} />
                 </div>
+                <Container>
+                    <Row className={styles.typeRow}>
+                        {
+                        this.props.pokemon.types.map(type => (
+                            <PokemonCardType type={type} />
+                        ))
+                        }
+                    </Row>  
+                </Container>
                 
             </Card>
         )
