@@ -23,12 +23,19 @@ class Pokedex extends Component<any, PokedexState> {
 
         this.getPokemon = this.getPokemon.bind(this)
         this.loadMore = this.loadMore.bind(this)
+        this.handleScroll = this.handleScroll.bind(this)
     }
     
 
     componentDidMount() {
         this.getPokemon(null)
+        window.addEventListener("scroll", this.handleScroll);
     }
+
+    componentWillUnmount() {
+        window.removeEventListener("scroll", this.handleScroll);
+    }
+    
 
     async getPokemon(loadURL: any) {
         try {
@@ -105,9 +112,20 @@ class Pokedex extends Component<any, PokedexState> {
         this.getPokemon(this.nextBatchOfPokemonURL)
     }
 
+    handleScroll() {
+        const windowHeight = "innerHeight" in window ? window.innerHeight : document.documentElement.offsetHeight
+        const body = document.body
+        const html = document.documentElement
+        const docHeight = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight)
+        const windowBottom = windowHeight + window.pageYOffset;
+        if (windowBottom >= docHeight) {
+            this.loadMore()
+        }
+    }
+
     render() {
         return (
-            <div style={{position: "absolute", top: "100%", width: "100%", paddingTop: "10%"}}>
+            <div style={{position: "absolute", top: "100%", width: "100%", paddingTop: "10%", paddingBottom: "10%"}}>
                 <div style={{position: "relative"}}>
                     <Container>
                         <Row>
@@ -123,11 +141,6 @@ class Pokedex extends Component<any, PokedexState> {
                             : 
                             <p>Loading...</p>
                             }
-                        </Row>
-                        <Row>
-                            <Col style={{textAlign : 'center'}}>
-                                <Badge variant="secondary" pill onClick={this.loadMore} style={{padding: "5px 15px"}} ><h5>Load More</h5></Badge>
-                            </Col>
                         </Row>
                     </Container>
 
