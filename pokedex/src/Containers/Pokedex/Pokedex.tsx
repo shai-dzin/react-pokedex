@@ -20,15 +20,24 @@ class Pokedex extends Component<any, PokedexState> {
             pokemonReferences : [],
             pokemons: []
         }
+
+        this.getPokemon = this.getPokemon.bind(this)
+        this.loadMore = this.loadMore.bind(this)
     }
+    
 
     componentDidMount() {
         this.getPokemon(null)
     }
 
-    async getPokemon() {
+    async getPokemon(loadURL: any) {
         try {
-            let url = "https://pokeapi.co/api/v2/pokemon"
+            var url = "https://pokeapi.co/api/v2/pokemon"
+
+            if(loadURL != undefined || loadURL != null) {
+                url = loadURL
+            }
+
             const response = await axios.get(url)
 
             // Insert new Pokemon into Array
@@ -92,6 +101,10 @@ class Pokedex extends Component<any, PokedexState> {
         return 0;
     }
 
+    loadMore() {
+        this.getPokemon(this.nextBatchOfPokemonURL)
+    }
+
     render() {
         return (
             <div style={{position: "absolute", top: "100%", width: "100%", paddingTop: "10%"}}>
@@ -110,6 +123,11 @@ class Pokedex extends Component<any, PokedexState> {
                             : 
                             <p>Loading...</p>
                             }
+                        </Row>
+                        <Row>
+                            <Col style={{textAlign : 'center'}}>
+                                <Badge variant="secondary" pill onClick={this.loadMore} style={{padding: "5px 15px"}} ><h5>Load More</h5></Badge>
+                            </Col>
                         </Row>
                     </Container>
 
