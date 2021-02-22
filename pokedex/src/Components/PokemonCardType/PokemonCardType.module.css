@@ -1,0 +1,12 @@
+.cardTypeCol {
+    margin-bottom: 3%;
+}
+
+.cardTypeCol h4{
+    text-align: center;
+    margin: auto 0;
+}
+
+.cardTypeCol span {
+    padding: 10px 20px
+}
