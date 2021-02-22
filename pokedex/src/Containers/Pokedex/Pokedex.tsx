@@ -99,10 +99,10 @@ class Pokedex extends Component<any, PokedexState> {
 
 
     compare( a: Pokemon, b: Pokemon ) {
-        if ( a.id < b.id ){
+        if ( a.order < b.order ){
             return -1;
         }
-        if ( a.id > b.id ){
+        if ( a.order > b.order ){
             return 1;
         }
         return 0;
