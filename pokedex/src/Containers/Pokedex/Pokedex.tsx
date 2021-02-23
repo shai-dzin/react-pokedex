@@ -1,9 +1,7 @@
 import React, { Component } from 'react'
 import axios from "axios"
-import { Interface } from 'readline'
-import { Badge, Card, Col, Container, Row } from 'react-bootstrap'
+import { Col, Container, Row } from 'react-bootstrap'
 import PokemonCard from '../../Components/PokemonCard/PokemonCard'
-import { SortedArray } from 'typescript'
 
 interface PokedexState {
     pokemonReferences: PokemonReference[],
@@ -42,7 +40,7 @@ class Pokedex extends Component<any, PokedexState> {
         try {
             var url = "https://pokeapi.co/api/v2/pokemon"
 
-            if(loadURL != undefined || loadURL != null) {
+            if(loadURL != null) {
                 url = loadURL
             }
 
@@ -58,7 +56,6 @@ class Pokedex extends Component<any, PokedexState> {
             
             // Save the URL to the next Batch
             this.nextBatchOfPokemonURL = response.data.next
-            console.log(this.nextBatchOfPokemonURL)
 
             // Load Detailed information about them
             this.loadDetailedPokemonInfo()
@@ -138,8 +135,8 @@ class Pokedex extends Component<any, PokedexState> {
                             this.state.pokemons.length > 0 ?
                             this.state.pokemons.map(pokemon => {
                                 return (
-                                    <Col md="4" onClick={() => this.showDetailPageOf(pokemon)}>
-                                        <PokemonCard pokemon={pokemon} />
+                                    <Col md="4" onClick={() => this.showDetailPageOf(pokemon)} key={pokemon.order} >
+                                        <PokemonCard pokemon={pokemon}  />
                                     </Col> 
                                 )
                             })

@@ -23,7 +23,7 @@ class PokemonCard extends Component<{pokemon: Pokemon}, {}> {
                     <Row className={styles.typeRow}>
                         {
                         this.props.pokemon.types.map(type => (
-                            <PokemonCardType type={type} />
+                            <PokemonCardType type={type} key={type.type.url} />
                         ))
                         }
                     </Row>  

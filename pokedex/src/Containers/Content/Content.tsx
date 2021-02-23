@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import { Container } from 'react-bootstrap';
 import Onboarding from '../Onboarding/Onboarding';
 import Pokedex from '../Pokedex/Pokedex';
-import styles from "./Content.module.css";
 
 class Content extends Component {
     render() {
@@ -10,7 +8,6 @@ class Content extends Component {
             <div>
                 <Onboarding />
                 <Pokedex />
-                
             </div>
         );
     }

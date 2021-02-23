@@ -11,39 +11,6 @@ interface PokemonCardTypeState {
     typeColor: string
 }
 
-class PokemonCardType extends Component<PokemonCardTypeProps, PokemonCardTypeState> {
-
-    constructor(props: PokemonCardTypeProps) {
-        super(props)
-
-        this.state = {
-            typeColor: "#AAAAAA",
-        }
-    }
-
-    componentWillMount() {
-        this.setState({
-            typeColor: this.getColorForPokemonType(this.props.type)
-        })
-    }
-    
-    getColorForPokemonType(type: PokeType): string {
-        let typeColor: PokeTypeColor = PokeTypeColor[type.type.name as keyof typeof PokeTypeColor]
-        return "#"+typeColor
-    }
-
-    render() {
-        return (
-            <Col className={styles.cardTypeCol} >
-                <h4><Badge pill style={{backgroundColor: this.state.typeColor, color: "white"}}>{this.props.type.type.name.toLocaleUpperCase()}</Badge></h4>
-            </Col>
-            
-        )
-    }
-}
-
-export default PokemonCardType
-
 enum PokeTypeColor {
     normal = "A8A77A",
     fighting  = "C22E28",
@@ -66,3 +33,37 @@ enum PokeTypeColor {
     unknown = "AAAAAA",
     shadow = "AAAAAA",
 }
+
+class PokemonCardType extends Component<PokemonCardTypeProps, PokemonCardTypeState> {
+
+    constructor(props: PokemonCardTypeProps) {
+        super(props)
+
+        this.state = {
+            typeColor: "#AAAAAA",
+        }
+    }
+
+    componentDidMount() {
+        this.setState({
+            typeColor: this.getColorForPokemonType(this.props.type)
+        })
+    }
+    
+    getColorForPokemonType(type: PokeType): string {
+        let typeColor: PokeTypeColor = PokeTypeColor[type.type.name as keyof typeof PokeTypeColor]
+        return "#"+typeColor
+    }
+
+    render() {
+        return (
+            <Col className={styles.cardTypeCol} >
+                <h4><Badge pill style={{backgroundColor: this.state.typeColor, color: "white"}}>{this.props.type.type.name.toLocaleUpperCase()}</Badge></h4>
+            </Col>
+            
+        )
+    }
+}
+
+export default PokemonCardType
+
