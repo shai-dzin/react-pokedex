@@ -24,6 +24,7 @@ class Pokedex extends Component<any, PokedexState> {
         this.getPokemon = this.getPokemon.bind(this)
         this.loadMore = this.loadMore.bind(this)
         this.handleScroll = this.handleScroll.bind(this)
+        this.showDetailPageOf = this.showDetailPageOf.bind(this)
     }
     
 
@@ -123,6 +124,10 @@ class Pokedex extends Component<any, PokedexState> {
         }
     }
 
+    showDetailPageOf(pokemon: Pokemon) {
+        console.log("Show Detail of "+pokemon.name);
+    }
+
     render() {
         return (
             <div style={{position: "absolute", top: "100%", width: "100%", paddingTop: "10%", paddingBottom: "10%"}}>
@@ -133,7 +138,7 @@ class Pokedex extends Component<any, PokedexState> {
                             this.state.pokemons.length > 0 ?
                             this.state.pokemons.map(pokemon => {
                                 return (
-                                    <Col md="4">
+                                    <Col md="4" onClick={() => this.showDetailPageOf(pokemon)}>
                                         <PokemonCard pokemon={pokemon} />
                                     </Col> 
                                 )
