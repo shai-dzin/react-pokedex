@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import axios from "axios"
 import { Col, Container, Row } from 'react-bootstrap'
 import PokemonCard from '../../Components/PokemonCard/PokemonCard'
+import { Link } from 'react-router-dom'
 
 interface PokedexState {
     pokemonReferences: PokemonReference[],
@@ -22,7 +23,6 @@ class Pokedex extends Component<any, PokedexState> {
         this.getPokemon = this.getPokemon.bind(this)
         this.loadMore = this.loadMore.bind(this)
         this.handleScroll = this.handleScroll.bind(this)
-        this.showDetailPageOf = this.showDetailPageOf.bind(this)
     }
     
 
@@ -121,10 +121,6 @@ class Pokedex extends Component<any, PokedexState> {
         }
     }
 
-    showDetailPageOf(pokemon: Pokemon) {
-        console.log("Show Detail of "+pokemon.name);
-    }
-
     render() {
         return (
             <div style={{position: "absolute", top: "100%", width: "100%", paddingTop: "10%", paddingBottom: "10%"}}>
@@ -134,9 +130,12 @@ class Pokedex extends Component<any, PokedexState> {
                             {
                             this.state.pokemons.length > 0 ?
                             this.state.pokemons.map(pokemon => {
+                                let link = "/pokemon/"+pokemon.id.toString()
                                 return (
-                                    <Col md="4" onClick={() => this.showDetailPageOf(pokemon)} key={pokemon.order} >
-                                        <PokemonCard pokemon={pokemon}  />
+                                    <Col md="4" key={pokemon.order} >
+                                        <Link to={link} >
+                                            <PokemonCard pokemon={pokemon} key={pokemon.order} />
+                                        </Link>
                                     </Col> 
                                 )
                             })
@@ -155,7 +154,7 @@ class Pokedex extends Component<any, PokedexState> {
 
 export default Pokedex;
 
-interface PokemonReference {
+export interface PokemonReference {
     name: string
     url: string
 }
