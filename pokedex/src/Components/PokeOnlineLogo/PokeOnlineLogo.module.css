@@ -1,0 +1,18 @@
+.logoRow {
+    position: absolute;
+    font-size: 125px;
+    font-family: Luminari;
+    text-shadow: 0px 0px 18px rgba(0, 0, 0, 1);
+    top: 50%;
+    left: 50%;
+    transform: translateY(-50%) translateX(-50%);
+}
+
+.logoRowSmallTop {
+    position: relative;
+    font-size: 65px;
+    font-family: Luminari;
+    text-shadow: 0px 0px 18px rgba(0, 0, 0, 1);
+    text-align: center;
+    padding-top: 20px;
+}

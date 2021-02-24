@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import styles from "./MainPage.module.css";
-import { Container, Image } from 'react-bootstrap';
+import { Image } from 'react-bootstrap';
 import image from "../../Images/background.jpg";
-import Onboarding from '../Onboarding/Onboarding';
 import Content from '../Content/Content';
 
 class MainPage extends Component {

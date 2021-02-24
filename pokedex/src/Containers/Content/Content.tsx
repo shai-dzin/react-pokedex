@@ -1,17 +1,26 @@
 import React, { Component } from 'react';
-import { Container } from 'react-bootstrap';
+import { 
+    Route, 
+    Switch,
+    
+} from 'react-router-dom';
+import DetailView from '../DetailView/DetailView';
+import DetailViewSwitch from '../DetailView/DetailViewSwitch';
 import Onboarding from '../Onboarding/Onboarding';
 import Pokedex from '../Pokedex/Pokedex';
-import styles from "./Content.module.css";
 
 class Content extends Component {
+
     render() {
         return (
-            <div>
-                <Onboarding />
-                <Pokedex />
-                
-            </div>
+            <Switch>
+                <Route exact path="/">
+                    <Onboarding />
+                    <Pokedex />
+                </Route>
+                <Route path="/pokemon/:id" component={DetailView} >
+                </Route>
+            </Switch>
         );
     }
 }

@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
 import axios from "axios"
-import { Interface } from 'readline'
-import { Badge, Card, Col, Container, Row } from 'react-bootstrap'
+import { Col, Container, Row } from 'react-bootstrap'
 import PokemonCard from '../../Components/PokemonCard/PokemonCard'
-import { SortedArray } from 'typescript'
+import { Link } from 'react-router-dom'
 
 interface PokedexState {
     pokemonReferences: PokemonReference[],
@@ -41,7 +40,7 @@ class Pokedex extends Component<any, PokedexState> {
         try {
             var url = "https://pokeapi.co/api/v2/pokemon"
 
-            if(loadURL != undefined || loadURL != null) {
+            if(loadURL != null) {
                 url = loadURL
             }
 
@@ -57,7 +56,6 @@ class Pokedex extends Component<any, PokedexState> {
             
             // Save the URL to the next Batch
             this.nextBatchOfPokemonURL = response.data.next
-            console.log(this.nextBatchOfPokemonURL)
 
             // Load Detailed information about them
             this.loadDetailedPokemonInfo()
@@ -132,9 +130,12 @@ class Pokedex extends Component<any, PokedexState> {
                             {
                             this.state.pokemons.length > 0 ?
                             this.state.pokemons.map(pokemon => {
+                                let link = "/pokemon/"+pokemon.id.toString()
                                 return (
-                                    <Col md="4">
-                                        <PokemonCard pokemon={pokemon} />
+                                    <Col md="4" key={pokemon.order} >
+                                        <Link to={link} >
+                                            <PokemonCard pokemon={pokemon} key={pokemon.order} />
+                                        </Link>
                                     </Col> 
                                 )
                             })
@@ -153,7 +154,7 @@ class Pokedex extends Component<any, PokedexState> {
 
 export default Pokedex;
 
-interface PokemonReference {
+export interface PokemonReference {
     name: string
     url: string
 }
