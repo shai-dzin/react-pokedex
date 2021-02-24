@@ -132,7 +132,9 @@ class DetailView extends Component<RouteComponentProps<PokemonRouterProps>, Poke
     render() {
         return (
             <Container fluid className={styles.detailsContainer}>
-                <PokeOnlineLogoSmallTop />
+                <Link to="/" className={styles.logo}>
+                    <PokeOnlineLogoSmallTop />
+                </Link>
                 <Row className={styles.imageRow + " justify-content-md-center"}>
                     <Col md="3" className="d-none d-md-block align-items-center" >
                         <div className={styles.evolutionImagesDiv}>

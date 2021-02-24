@@ -2,6 +2,11 @@
     background-color: rgba(0, 0, 0, 0.4);
 }
 
+.logo {
+    text-decoration: none;
+    color: white;
+}
+
 .imageRow {
     margin-top: 3%;
 }
