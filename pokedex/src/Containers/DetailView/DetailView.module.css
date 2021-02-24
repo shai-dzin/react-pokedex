@@ -1,10 +1,14 @@
 .detailsContainer {
-    background-color: rgba(0, 0, 0, 0.4);
 }
 
 .logo {
     text-decoration: none;
     color: white;
+}
+
+.logo:hover {
+    text-decoration: none;
+    color: rgb(190, 190, 190)
 }
 
 .imageRow {
@@ -45,4 +49,32 @@
     filter: url(#drop-shadow);
     -ms-filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
     filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
+}
+
+
+.infoRow {
+    padding-left: 5%;
+    padding-right: 5%;
+    text-shadow: 0px 0px 12px black;
+    margin-top: 3%;
+    height: 33vh;
+    overflow: hidden;
+}
+
+.infoTitle {
+    font-weight: bold;
+    text-decoration: underline;
+    margin-right: 2.5%;
+}
+
+.abilitiesList {
+    font-weight: bold;
+}
+
+.statName {
+    font-weight: bold;
+}
+.movesList {
+    overflow-y: auto;
+    max-height: 200vh;
 }

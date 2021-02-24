@@ -31,12 +31,6 @@ class DetailView extends Component<RouteComponentProps<PokemonRouterProps>, Poke
     }
 
     componentDidUpdate(props: RouteComponentProps<PokemonRouterProps>) {
-        console.log("Update: ");
-        console.log(props);
-
-        console.log("Old")
-        console.log(this.props);
-        
         if(props.history.location.pathname !== props.location.pathname) {
             this.getPokemon()
         }
@@ -128,6 +122,51 @@ class DetailView extends Component<RouteComponentProps<PokemonRouterProps>, Poke
         })
     }
     
+    getTypesAsString(): string {
+        var output: string = ""
+        this.state.pokemon?.types.map((type, index, all) => {
+            output += type.type.name.toUpperCase()
+            if (index < (all.length - 1)) output += ", "
+            return output
+        })
+        return output
+    }
+
+    getAbilitesAsUL() {
+        return (
+            <ul className={styles.abilitiesList}>
+                {
+                    this.state.pokemon?.abilities.map(ability => {
+                        return <li key={ability.ability.name}><h3>{ability.ability.name.toUpperCase()}</h3></li>
+                    })
+                }
+            </ul>
+        )
+    }
+
+    getBaseStats() {
+        return (
+            <div>
+                {
+                this.state.pokemon?.stats.map(stat => {
+                    return <h2><span className={styles.statName}>{stat.stat.name.toUpperCase()}:</span> {stat.base_stat}</h2>
+                })
+                }
+            </div>
+        )
+    }
+
+    getMoves() {
+        return (
+            <div style={{overflowY: "scroll", maxHeight: "200vh"}}>
+                {
+                this.state.pokemon?.moves.map(move => {
+                    return <h2>{move.move.name}</h2>
+                })
+                }
+            </div>
+        )
+    }
 
     render() {
         return (
@@ -183,6 +222,29 @@ class DetailView extends Component<RouteComponentProps<PokemonRouterProps>, Poke
 
                         }
                         </div>
+                    </Col>
+                </Row>
+                <Row className={styles.infoRow}>
+                    <Col md="3">
+                        <div>
+                            <h2><span className={styles.infoTitle}>Name:</span> {this.state.pokemon?.name.toLocaleUpperCase()}</h2>
+                            <h2><span className={styles.infoTitle}>Type:</span>{this.getTypesAsString()}</h2>
+                        </div>
+                    </Col>
+                    <Col md="3">
+                        <div>
+                            <h2><span className={styles.infoTitle}>Order Number:</span> #{this.state.pokemon?.order}</h2>
+                            <h2 className={styles.infoTitle}>Abilities:</h2>
+                            {this.getAbilitesAsUL()}
+                        </div>
+                    </Col>
+                    <Col md="3">
+                        <h2 className={styles.infoTitle}>Base Stats</h2>
+                        {this.getBaseStats()}
+                    </Col>
+                    <Col md="3" className={styles.movesCol}>
+                        <h2 className={styles.infoTitle}>Moves</h2>
+                        {this.getMoves()}
                     </Col>
                 </Row>
             </Container>
